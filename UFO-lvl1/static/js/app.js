@@ -6,8 +6,16 @@ tableBody = d3.select("tbody")
 
 // add a row for each data Item and get the key and value pairs for each entry
 tableData.forEach(dataItem => {
-    tableBody.append("tr")
+
+    // Add a row for each item in the dataset
+    var tableRow = tableBody.append("tr");
+    // get the key and value pair for later use
     Object.entries(dataItem).forEach(function([key, value]) {
         console.log(key, value);
-      });
+      
+// add multiple cells for each row
+    var rowCell = tableRow.append("td");
+// add the text to each cell
+    rowCell.text(value)
+    })
 });
