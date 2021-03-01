@@ -11,7 +11,7 @@ tableData.forEach(dataItem => {
     var tableRow = tableBody.append("tr");
     // get the key and value pair for later use
     Object.entries(dataItem).forEach(function([key, value]) {
-        console.log(key, value);
+        // console.log(key, value);
       
 // add multiple cells for each row
     var rowCell = tableRow.append("td");
@@ -19,3 +19,37 @@ tableData.forEach(dataItem => {
     rowCell.text(value)
     })
 });
+
+// creating a function to search the data by date
+
+// Get the user input and store it in a variable
+var form = d3.select("#form");
+
+// store the button as a variable
+var submitButton = d3.select("#filter-btn")
+
+// when the button is clicked or the form is submitted run the function
+submitButton.on("click", searchData);
+form.on("submit", searchData);
+
+// create the function that will filter the data when the button is clicked
+function searchData() {
+    d3.event.preventDefault();
+    
+    var userInput = d3.select("#datetime");
+    
+    // get the text that the user input
+    var userInputValue = userInput.property("value");
+    
+    var dateFilter = tableData.filter(tableItem => tableItem.date === userInputValue);
+    
+    console.log(dateFilter)
+
+
+
+
+};
+
+
+
+
