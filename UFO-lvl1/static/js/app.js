@@ -5,6 +5,7 @@ var tableData = data;
 tableBody = d3.select("tbody")
 
 // add a row for each data Item and get the key and value pairs for each entry
+
 tableData.forEach(dataItem => {
 
     // Add a row for each item in the dataset
@@ -41,9 +42,9 @@ function searchData() {
     // get the text that the user input
     var userInputValue = userInput.property("value");
     
-    var dateFilter = tableData.filter(tableItem => tableItem.date === userInputValue);
+    var dateFilter = tableData.filter(tableItem => tableItem.datetime === userInputValue);
     
-    console.log(dateFilter)
+    // console.log(dateFilter)
 
 
 
