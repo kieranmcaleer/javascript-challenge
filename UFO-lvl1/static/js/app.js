@@ -4,9 +4,9 @@ var tableData = data;
 // Get a reference to where the tablebody is in the html code
 tableBody = d3.select("tbody")
 
-// add a row for each data Item and get the key and value pairs for each entry
-
-tableData.forEach(dataItem => {
+// function to add a row for each data Item and get the key and value pairs for each entry
+function toTable(dataGroup){
+    dataGroup.forEach(dataItem => {
 
     // Add a row for each item in the dataset
     var tableRow = tableBody.append("tr");
@@ -19,9 +19,10 @@ tableData.forEach(dataItem => {
 // add the text to each cell
     rowCell.text(value)
     })
-});
-
-// creating a function to search the data by date
+})
+};
+// make sure that when you first open the site all of the data is showing
+toTable(tableData)
 
 // Get the user input and store it in a variable
 var form = d3.select("#form");
@@ -35,20 +36,28 @@ form.on("submit", searchData);
 
 // create the function that will filter the data when the button is clicked
 function searchData() {
+    // clear the whole table when searching for data so it can be updated
+    d3.select("tbody").selectAll("tr").remove();
     d3.event.preventDefault();
     
+    // gather the users input
     var userInput = d3.select("#datetime");
     
     // get the text that the user input
     var userInputValue = userInput.property("value");
     
+    // filter the data so that we can get all of the rows that have the date that the user selected
     var dateFilter = tableData.filter(tableItem => tableItem.datetime === userInputValue);
     
+    // check if the data is correct
     // console.log(dateFilter)
+    // use the to table function to put only the rows that the user selected into the table
+    toTable(dateFilter)
 
-
-
-
+    // if the filter is blank just return all of the rows
+    if (userInputValue === ""){
+        toTable(tableData)
+    }
 };
 
 
